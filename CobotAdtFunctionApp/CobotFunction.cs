@@ -28,7 +28,6 @@ namespace IotHubtoTwins
 
             try
             {
-                // Authenticate with Digital Twins
                 var cred = new DefaultAzureCredential();
                 var client = new DigitalTwinsClient(new Uri(adtInstanceUrl), cred);
                 log.LogInformation($"ADT service client connection created.");
@@ -37,20 +36,15 @@ namespace IotHubtoTwins
                 {
                     log.LogInformation(eventGridEvent.Data.ToString());
 
-                    // <Find_device_ID_and_temperature>
                     JObject deviceMessage = (JObject)JsonConvert.DeserializeObject(eventGridEvent.Data.ToString());
                     string deviceId = (string) deviceMessage["systemProperties"]["iothub-connection-device-id"];
-                    var elapsed_time = deviceMessage["body"]["ElapsedTime"];
-                    // </Find_device_ID_and_temperature>
+                    double elapsedTime = (double) deviceMessage["body"]["ElapsedTime"];
 
-                    log.LogInformation((string) deviceMessage["systemProperties"]["iothub-connection-device-id"]);
-                    log.LogInformation($"Device:{deviceId} elapsed_time is:{elapsed_time}");
+                    log.LogInformation($"Device:{deviceId} elapsedTime is:{elapsedTime}");
 
-                    // <Update_twin_with_device_temperature>
                     var updateTwinData = new JsonPatchDocument();
-                    updateTwinData.AppendReplace("/ElapsedTime", elapsed_time.Value<double>());
+                    updateTwinData.AppendReplace("/ElapsedTime", elapsedTime);
                     await client.UpdateDigitalTwinAsync(deviceId, updateTwinData);
-                    // </Update_twin_with_device_temperature>
                 }
             }
             catch (Exception ex)
