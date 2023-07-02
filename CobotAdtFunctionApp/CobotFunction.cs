@@ -48,7 +48,7 @@ namespace IotHubtoTwins
 
                     // <Update_twin_with_device_temperature>
                     var updateTwinData = new JsonPatchDocument();
-                    updateTwinData.AppendReplace("/elapsed_time", elapsed_time.Value<double>());
+                    updateTwinData.AppendReplace("/ElapsedTime", elapsed_time.Value<double>());
                     await client.UpdateDigitalTwinAsync(deviceId, updateTwinData);
                     // </Update_twin_with_device_temperature>
                 }
