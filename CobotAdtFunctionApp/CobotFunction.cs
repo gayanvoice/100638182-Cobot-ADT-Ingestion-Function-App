@@ -39,10 +39,11 @@ namespace IotHubtoTwins
 
                     // <Find_device_ID_and_temperature>
                     JObject deviceMessage = (JObject)JsonConvert.DeserializeObject(eventGridEvent.Data.ToString());
-                    string deviceId = (string)deviceMessage["systemProperties"]["iothub-connection-device-id"];
+                    string deviceId = (string) deviceMessage["systemProperties"]["iothub-connection-device-id"];
                     var elapsed_time = deviceMessage["body"]["elapsed_time"];
                     // </Find_device_ID_and_temperature>
 
+                    log.LogInformation((string) deviceMessage["systemProperties"]["iothub-connection-device-id"]);
                     log.LogInformation($"Device:{deviceId} elapsed_time is:{elapsed_time}");
 
                     // <Update_twin_with_device_temperature>
