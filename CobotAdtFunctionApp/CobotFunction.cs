@@ -1,22 +1,19 @@
 using System;
-using Azure;
-using System.Net.Http;
-using Azure.Core.Pipeline;
-using Azure.DigitalTwins.Core;
-using Azure.Identity;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.EventGrid;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Azure.Messaging.EventGrid;
+using Azure.DigitalTwins.Core;
+using Azure.Identity;
+using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace IotHubtoTwins
 {
     public class IoTHubtoTwins
     {
         private static readonly string adtInstanceUrl = Environment.GetEnvironmentVariable("ADT_SERVICE_URL");
-        private static readonly HttpClient httpClient = new HttpClient();
 
         [FunctionName("IoTHubtoTwins")]
         // While async void should generally be used with caution, it's not uncommon for Azure function apps, since the function app isn't awaiting the task.
@@ -25,7 +22,7 @@ namespace IotHubtoTwins
 #pragma warning restore AZF0001 // Suppress async void error
         {
             if (adtInstanceUrl == null) log.LogError("Application setting \"ADT_SERVICE_URL\" not set");
-
+            else
             try
             {
                 var cred = new DefaultAzureCredential();
@@ -42,7 +39,7 @@ namespace IotHubtoTwins
 
                     log.LogInformation($"Device:{deviceId} elapsedTime is:{elapsedTime}");
 
-                    var updateTwinData = new JsonPatchDocument();
+                    Azure.JsonPatchDocument updateTwinData = new Azure.JsonPatchDocument();
                     updateTwinData.AppendReplace("/ElapsedTime", elapsedTime);
                     await client.UpdateDigitalTwinAsync(deviceId, updateTwinData);
                 }
