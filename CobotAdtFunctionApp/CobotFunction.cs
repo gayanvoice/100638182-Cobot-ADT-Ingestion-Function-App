@@ -33,16 +33,21 @@ namespace IotHubtoTwins
                 {
                     log.LogInformation(eventGridEvent.Data.ToString());
 
-                    JObject deviceMessage = (JObject)JsonConvert.DeserializeObject(eventGridEvent.Data.ToString());
-                    string deviceId = (string) deviceMessage["systemProperties"]["iothub-connection-device-id"];
-                    double elapsedTime = (double) deviceMessage["body"]["ElapsedTime"];
+                        log.LogInformation(eventGridEvent.Data.ToString());
 
-                    log.LogInformation($"Device:{deviceId} elapsedTime is:{elapsedTime}");
+                        JObject deviceMessage = (JObject)JsonConvert.DeserializeObject(eventGridEvent.Data.ToString());
+                        string deviceId = (string)deviceMessage["systemProperties"]["iothub-connection-device-id"];
+                        double elapsedTime = (double)deviceMessage["body"]["ElapsedTime"];
 
-                    Azure.JsonPatchDocument updateTwinData = new Azure.JsonPatchDocument();
-                    updateTwinData.AppendReplace("/ElapsedTime", elapsedTime);
-                    await client.UpdateDigitalTwinAsync(deviceId, updateTwinData);
-                }
+                        log.LogInformation($"Device:{deviceId} ElapsedTime {elapsedTime}");
+
+                        Azure.JsonPatchDocument jsonPatchDocument = new Azure.JsonPatchDocument();
+                        jsonPatchDocument.AppendReplace("/ElapsedTime", elapsedTime);
+
+                        log.LogInformation($"JsonPatchDocument: {jsonPatchDocument}");
+
+                        await client.UpdateDigitalTwinAsync(deviceId, jsonPatchDocument);
+                    }
             }
             catch (Exception ex)
             {
