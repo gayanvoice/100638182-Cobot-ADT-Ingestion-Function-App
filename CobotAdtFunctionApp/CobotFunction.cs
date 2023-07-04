@@ -8,6 +8,7 @@ using Azure.Identity;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using System.Linq.Expressions;
 
 namespace IotHubtoTwins
 {
@@ -36,16 +37,56 @@ namespace IotHubtoTwins
                         log.LogInformation(eventGridEvent.Data.ToString());
 
                         JObject deviceMessage = (JObject)JsonConvert.DeserializeObject(eventGridEvent.Data.ToString());
-                        string deviceId = (string)deviceMessage["systemProperties"]["iothub-connection-device-id"];
-                        double elapsedTime = (double)deviceMessage["body"]["ElapsedTime"];
-
-                        log.LogInformation($"Device:{deviceId} ElapsedTime {elapsedTime}");
-
                         Azure.JsonPatchDocument jsonPatchDocument = new Azure.JsonPatchDocument();
-                        jsonPatchDocument.AppendReplace("/ElapsedTime", elapsedTime);
+                        string deviceId = (string)deviceMessage["systemProperties"]["iothub-connection-device-id"];
+                        switch (deviceId)
+                        {
+                            case "Cobot":
+                                double cobotElapsedTime = (double)deviceMessage["body"]["ElapsedTime"];
+                                jsonPatchDocument.AppendReplace("/ElapsedTime", cobotElapsedTime);
+                                break;
+                            case "Base":
+                                double basePosition = (double)deviceMessage["body"]["position"];
+                                double baseTemperature = (double)deviceMessage["body"]["temperature"];
+                                double baseVoltage = (double)deviceMessage["body"]["voltage"];
+                                jsonPatchDocument.AppendReplace("/position", basePosition);
+                                jsonPatchDocument.AppendReplace("/temperature", baseTemperature);
+                                jsonPatchDocument.AppendReplace("/voltage", baseVoltage);
+                                break;
+                            case "ControlBox":
+                                double controlBoxVoltage = (double)deviceMessage["body"]["Voltage"];
+                                jsonPatchDocument.AppendReplace("/Voltage", controlBoxVoltage);
+                                break;
+                            case "Elbow":
+                                double elbowPosition = (double)deviceMessage["body"]["position"];
+                                double elbowTemperature = (double)deviceMessage["body"]["temperature"];
+                                double elbowVoltage = (double)deviceMessage["body"]["voltage"];
+                                double elbowX = (double)deviceMessage["body"]["x"];
+                                double elbowY = (double)deviceMessage["body"]["y"];
+                                double elbowZ = (double)deviceMessage["body"]["z"];
+                                jsonPatchDocument.AppendReplace("/position", elbowPosition);
+                                jsonPatchDocument.AppendReplace("/temperature", elbowTemperature);
+                                jsonPatchDocument.AppendReplace("/voltage", elbowVoltage);
+                                jsonPatchDocument.AppendReplace("/x", elbowX);
+                                jsonPatchDocument.AppendReplace("/y", elbowY);
+                                jsonPatchDocument.AppendReplace("/z", elbowZ);
+                                break;
+                            case "Payload":
+                                double payloadMass = (double)deviceMessage["body"]["mass"];
+                                double payloadCogx = (double)deviceMessage["body"]["cogx"];
+                                double payloadCogy = (double)deviceMessage["body"]["cogy"];
+                                double payloadCogz = (double)deviceMessage["body"]["cogz"];
+                                jsonPatchDocument.AppendReplace("/mass", payloadMass);
+                                jsonPatchDocument.AppendReplace("/cogx", payloadCogx);
+                                jsonPatchDocument.AppendReplace("/cogy", payloadCogy);
+                                jsonPatchDocument.AppendReplace("/cogz", payloadCogz);
+                                break;
+                            default:
+                                // code block
+                                break;
+                        }
 
                         log.LogInformation($"JsonPatchDocument: {jsonPatchDocument}");
-
                         await client.UpdateDigitalTwinAsync(deviceId, jsonPatchDocument);
                     }
             }
