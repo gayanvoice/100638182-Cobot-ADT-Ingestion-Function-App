@@ -81,6 +81,56 @@ namespace IotHubtoTwins
                                 jsonPatchDocument.AppendReplace("/cogy", payloadCogy);
                                 jsonPatchDocument.AppendReplace("/cogz", payloadCogz);
                                 break;
+                            case "Shoulder":
+                                double shoulderPosition = (double)deviceMessage["body"]["position"];
+                                double shoulderTemperature = (double)deviceMessage["body"]["temperature"];
+                                double shoulderVoltage = (double)deviceMessage["body"]["voltage"];
+                                jsonPatchDocument.AppendReplace("/position", shoulderPosition);
+                                jsonPatchDocument.AppendReplace("/temperature", shoulderTemperature);
+                                jsonPatchDocument.AppendReplace("/voltage", shoulderVoltage);
+                                break;
+                            case "Wrist1":
+                                double wrist1Position = (double)deviceMessage["body"]["position"];
+                                double wrist1Temperature = (double)deviceMessage["body"]["temperature"];
+                                double wrist1Voltage = (double)deviceMessage["body"]["voltage"];
+                                jsonPatchDocument.AppendReplace("/position", wrist1Position);
+                                jsonPatchDocument.AppendReplace("/temperature", wrist1Temperature);
+                                jsonPatchDocument.AppendReplace("/voltage", wrist1Voltage);
+                                break;
+                            case "Wrist2":
+                                double wrist2Position = (double)deviceMessage["body"]["position"];
+                                double wrist2Temperature = (double)deviceMessage["body"]["temperature"];
+                                double wrist2Voltage = (double)deviceMessage["body"]["voltage"];
+                                jsonPatchDocument.AppendReplace("/position", wrist2Position);
+                                jsonPatchDocument.AppendReplace("/temperature", wrist2Temperature);
+                                jsonPatchDocument.AppendReplace("/voltage", wrist2Voltage);
+                                break;
+                            case "Wrist3":
+                                double wrist3Position = (double)deviceMessage["body"]["position"];
+                                double wrist3Temperature = (double)deviceMessage["body"]["temperature"];
+                                double wrist3Voltage = (double)deviceMessage["body"]["voltage"];
+                                jsonPatchDocument.AppendReplace("/position", wrist3Position);
+                                jsonPatchDocument.AppendReplace("/temperature", wrist3Temperature);
+                                jsonPatchDocument.AppendReplace("/voltage", wrist3Voltage);
+                                break;
+                            case "Tool":
+                                double toolTemperature = (double)deviceMessage["body"]["temperature"];
+                                double toolVoltage = (double)deviceMessage["body"]["voltage"];
+                                double toolX = (double)deviceMessage["body"]["x"];
+                                double toolY = (double)deviceMessage["body"]["y"];
+                                double toolZ = (double)deviceMessage["body"]["z"];
+                                double toolRx = (double)deviceMessage["body"]["rx"];
+                                double toolRy = (double)deviceMessage["body"]["ry"];
+                                double toolRz = (double)deviceMessage["body"]["rz"];
+                                jsonPatchDocument.AppendReplace("/position", toolTemperature);
+                                jsonPatchDocument.AppendReplace("/temperature", toolVoltage);
+                                jsonPatchDocument.AppendReplace("/x", toolX);
+                                jsonPatchDocument.AppendReplace("/y", toolY);
+                                jsonPatchDocument.AppendReplace("/z", toolZ);
+                                jsonPatchDocument.AppendReplace("/rx", toolRx);
+                                jsonPatchDocument.AppendReplace("/ry", toolRy);
+                                jsonPatchDocument.AppendReplace("/rz", toolRz);
+                                break;
                             default:
                                 // code block
                                 break;
