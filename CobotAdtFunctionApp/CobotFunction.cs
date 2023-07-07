@@ -5,10 +5,8 @@ using Microsoft.Extensions.Logging;
 using Azure.Messaging.EventGrid;
 using Azure.DigitalTwins.Core;
 using Azure.Identity;
-using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
-using System.Linq.Expressions;
 
 namespace IotHubtoTwins
 {
@@ -42,8 +40,8 @@ namespace IotHubtoTwins
                         switch (deviceId)
                         {
                             case "Cobot":
-                                double cobotElapsedTime = (double)deviceMessage["body"]["ElapsedTime"];
-                                jsonPatchDocument.AppendReplace("/ElapsedTime", cobotElapsedTime);
+                                double cobotElapsedTime = (double)deviceMessage["body"]["elapsed_time"];
+                                jsonPatchDocument.AppendReplace("/elapsed_time", cobotElapsedTime);
                                 break;
                             case "Base":
                                 double basePosition = (double)deviceMessage["body"]["position"];
