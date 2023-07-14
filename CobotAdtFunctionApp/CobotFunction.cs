@@ -53,7 +53,7 @@ namespace IotHubtoTwins
                                 break;
                             case "ControlBox":
                                 double controlBoxVoltage = (double)deviceMessage["body"]["voltage"];
-                                jsonPatchDocument.AppendReplace("/Voltage", controlBoxVoltage);
+                                jsonPatchDocument.AppendReplace("/voltage", controlBoxVoltage);
                                 break;
                             case "Elbow":
                                 double elbowPosition = (double)deviceMessage["body"]["position"];
