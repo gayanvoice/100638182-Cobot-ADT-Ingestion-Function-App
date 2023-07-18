@@ -8,7 +8,7 @@ using Azure.Identity;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 
-namespace IotHubtoTwins
+namespace CobotADTIoTIngestionFunctionApp
 {
     public class IoTHubtoTwins
     {
@@ -40,34 +40,34 @@ namespace IotHubtoTwins
                         switch (deviceId)
                         {
                             case "Cobot":
-                                double cobotElapsedTime = (double)deviceMessage["body"]["elapsed_time"];
-                                jsonPatchDocument.AppendReplace("/elapsed_time", cobotElapsedTime);
+                                double cobotElapsedTime = (double)deviceMessage["body"]["ElapsedTime"];
+                                jsonPatchDocument.AppendReplace("/ElapsedTime", cobotElapsedTime);
                                 break;
                             case "Base":
-                                double basePosition = (double)deviceMessage["body"]["position"];
-                                double baseTemperature = (double)deviceMessage["body"]["temperature"];
-                                double baseVoltage = (double)deviceMessage["body"]["voltage"];
-                                jsonPatchDocument.AppendReplace("/position", basePosition);
-                                jsonPatchDocument.AppendReplace("/temperature", baseTemperature);
-                                jsonPatchDocument.AppendReplace("/voltage", baseVoltage);
+                                double basePosition = (double)deviceMessage["body"]["Position"];
+                                double baseTemperature = (double)deviceMessage["body"]["Temperature"];
+                                double baseVoltage = (double)deviceMessage["body"]["Voltage"];
+                                jsonPatchDocument.AppendReplace("/Position", basePosition);
+                                jsonPatchDocument.AppendReplace("/Temperature", baseTemperature);
+                                jsonPatchDocument.AppendReplace("/Voltage", baseVoltage);
                                 break;
                             case "ControlBox":
-                                double controlBoxVoltage = (double)deviceMessage["body"]["voltage"];
-                                jsonPatchDocument.AppendReplace("/voltage", controlBoxVoltage);
+                                double controlBoxVoltage = (double)deviceMessage["body"]["Voltage"];
+                                jsonPatchDocument.AppendReplace("/Voltage", controlBoxVoltage);
                                 break;
                             case "Elbow":
-                                double elbowPosition = (double)deviceMessage["body"]["position"];
-                                double elbowTemperature = (double)deviceMessage["body"]["temperature"];
-                                double elbowVoltage = (double)deviceMessage["body"]["voltage"];
-                                double elbowX = (double)deviceMessage["body"]["x"];
-                                double elbowY = (double)deviceMessage["body"]["y"];
-                                double elbowZ = (double)deviceMessage["body"]["z"];
-                                jsonPatchDocument.AppendReplace("/position", elbowPosition);
-                                jsonPatchDocument.AppendReplace("/temperature", elbowTemperature);
-                                jsonPatchDocument.AppendReplace("/voltage", elbowVoltage);
-                                jsonPatchDocument.AppendReplace("/x", elbowX);
-                                jsonPatchDocument.AppendReplace("/y", elbowY);
-                                jsonPatchDocument.AppendReplace("/z", elbowZ);
+                                double elbowPosition = (double)deviceMessage["body"]["Position"];
+                                double elbowTemperature = (double)deviceMessage["body"]["Temperature"];
+                                double elbowVoltage = (double)deviceMessage["body"]["Voltage"];
+                                double elbowX = (double)deviceMessage["body"]["X"];
+                                double elbowY = (double)deviceMessage["body"]["Y"];
+                                double elbowZ = (double)deviceMessage["body"]["Z"];
+                                jsonPatchDocument.AppendReplace("/Position", elbowPosition);
+                                jsonPatchDocument.AppendReplace("/Temperature", elbowTemperature);
+                                jsonPatchDocument.AppendReplace("/Voltage", elbowVoltage);
+                                jsonPatchDocument.AppendReplace("/X", elbowX);
+                                jsonPatchDocument.AppendReplace("/Y", elbowY);
+                                jsonPatchDocument.AppendReplace("/Z", elbowZ);
                                 break;
                             case "Payload":
                                 double payloadMass = (double)deviceMessage["body"]["mass"];
@@ -80,60 +80,58 @@ namespace IotHubtoTwins
                                 jsonPatchDocument.AppendReplace("/cogz", payloadCogz);
                                 break;
                             case "Shoulder":
-                                double shoulderPosition = (double)deviceMessage["body"]["position"];
-                                double shoulderTemperature = (double)deviceMessage["body"]["temperature"];
-                                double shoulderVoltage = (double)deviceMessage["body"]["voltage"];
-                                jsonPatchDocument.AppendReplace("/position", shoulderPosition);
-                                jsonPatchDocument.AppendReplace("/temperature", shoulderTemperature);
-                                jsonPatchDocument.AppendReplace("/voltage", shoulderVoltage);
+                                double shoulderPosition = (double)deviceMessage["body"]["Position"];
+                                double shoulderTemperature = (double)deviceMessage["body"]["Temperature"];
+                                double shoulderVoltage = (double)deviceMessage["body"]["Voltage"];
+                                jsonPatchDocument.AppendReplace("/Position", shoulderPosition);
+                                jsonPatchDocument.AppendReplace("/Temperature", shoulderTemperature);
+                                jsonPatchDocument.AppendReplace("/Voltage", shoulderVoltage);
                                 break;
                             case "Wrist1":
-                                double wrist1Position = (double)deviceMessage["body"]["position"];
-                                double wrist1Temperature = (double)deviceMessage["body"]["temperature"];
-                                double wrist1Voltage = (double)deviceMessage["body"]["voltage"];
-                                jsonPatchDocument.AppendReplace("/position", wrist1Position);
-                                jsonPatchDocument.AppendReplace("/temperature", wrist1Temperature);
-                                jsonPatchDocument.AppendReplace("/voltage", wrist1Voltage);
+                                double wrist1Position = (double)deviceMessage["body"]["Position"];
+                                double wrist1Temperature = (double)deviceMessage["body"]["Temperature"];
+                                double wrist1Voltage = (double)deviceMessage["body"]["Voltage"];
+                                jsonPatchDocument.AppendReplace("/Position", wrist1Position);
+                                jsonPatchDocument.AppendReplace("/Temperature", wrist1Temperature);
+                                jsonPatchDocument.AppendReplace("/Voltage", wrist1Voltage);
                                 break;
                             case "Wrist2":
-                                double wrist2Position = (double)deviceMessage["body"]["position"];
-                                double wrist2Temperature = (double)deviceMessage["body"]["temperature"];
-                                double wrist2Voltage = (double)deviceMessage["body"]["voltage"];
-                                jsonPatchDocument.AppendReplace("/position", wrist2Position);
-                                jsonPatchDocument.AppendReplace("/temperature", wrist2Temperature);
-                                jsonPatchDocument.AppendReplace("/voltage", wrist2Voltage);
+                                double wrist2Position = (double)deviceMessage["body"]["Position"];
+                                double wrist2Temperature = (double)deviceMessage["body"]["Temperature"];
+                                double wrist2Voltage = (double)deviceMessage["body"]["Voltage"];
+                                jsonPatchDocument.AppendReplace("/Position", wrist2Position);
+                                jsonPatchDocument.AppendReplace("/Temperature", wrist2Temperature);
+                                jsonPatchDocument.AppendReplace("/Voltage", wrist2Voltage);
                                 break;
                             case "Wrist3":
-                                double wrist3Position = (double)deviceMessage["body"]["position"];
-                                double wrist3Temperature = (double)deviceMessage["body"]["temperature"];
-                                double wrist3Voltage = (double)deviceMessage["body"]["voltage"];
-                                jsonPatchDocument.AppendReplace("/position", wrist3Position);
-                                jsonPatchDocument.AppendReplace("/temperature", wrist3Temperature);
-                                jsonPatchDocument.AppendReplace("/voltage", wrist3Voltage);
+                                double wrist3Position = (double)deviceMessage["body"]["Position"];
+                                double wrist3Temperature = (double)deviceMessage["body"]["Temperature"];
+                                double wrist3Voltage = (double)deviceMessage["body"]["Voltage"];
+                                jsonPatchDocument.AppendReplace("/Position", wrist3Position);
+                                jsonPatchDocument.AppendReplace("/Temperature", wrist3Temperature);
+                                jsonPatchDocument.AppendReplace("/Voltage", wrist3Voltage);
                                 break;
                             case "Tool":
-                                double toolTemperature = (double)deviceMessage["body"]["temperature"];
-                                double toolVoltage = (double)deviceMessage["body"]["voltage"];
-                                double toolX = (double)deviceMessage["body"]["x"];
-                                double toolY = (double)deviceMessage["body"]["y"];
-                                double toolZ = (double)deviceMessage["body"]["z"];
-                                double toolRx = (double)deviceMessage["body"]["rx"];
-                                double toolRy = (double)deviceMessage["body"]["ry"];
-                                double toolRz = (double)deviceMessage["body"]["rz"];
-                                jsonPatchDocument.AppendReplace("/position", toolTemperature);
-                                jsonPatchDocument.AppendReplace("/temperature", toolVoltage);
-                                jsonPatchDocument.AppendReplace("/x", toolX);
-                                jsonPatchDocument.AppendReplace("/y", toolY);
-                                jsonPatchDocument.AppendReplace("/z", toolZ);
-                                jsonPatchDocument.AppendReplace("/rx", toolRx);
-                                jsonPatchDocument.AppendReplace("/ry", toolRy);
-                                jsonPatchDocument.AppendReplace("/rz", toolRz);
+                                double toolTemperature = (double)deviceMessage["body"]["Temperature"];
+                                double toolVoltage = (double)deviceMessage["body"]["Voltage"];
+                                double toolX = (double)deviceMessage["body"]["X"];
+                                double toolY = (double)deviceMessage["body"]["Y"];
+                                double toolZ = (double)deviceMessage["body"]["Z"];
+                                double toolRx = (double)deviceMessage["body"]["Rx"];
+                                double toolRy = (double)deviceMessage["body"]["Ry"];
+                                double toolRz = (double)deviceMessage["body"]["Rz"];
+                                jsonPatchDocument.AppendReplace("/Temperature", toolTemperature);
+                                jsonPatchDocument.AppendReplace("/Voltage", toolVoltage);
+                                jsonPatchDocument.AppendReplace("/X", toolX);
+                                jsonPatchDocument.AppendReplace("/Y", toolY);
+                                jsonPatchDocument.AppendReplace("/Z", toolZ);
+                                jsonPatchDocument.AppendReplace("/Rx", toolRx);
+                                jsonPatchDocument.AppendReplace("/Ry", toolRy);
+                                jsonPatchDocument.AppendReplace("/Rz", toolRz);
                                 break;
                             default:
-                                // code block
                                 break;
                         }
-
                         log.LogInformation($"JsonPatchDocument: {jsonPatchDocument}");
                         await client.UpdateDigitalTwinAsync(deviceId, jsonPatchDocument);
                     }
