@@ -70,14 +70,14 @@ namespace CobotADTIoTIngestionFunctionApp
                                 jsonPatchDocument.AppendReplace("/Z", elbowZ);
                                 break;
                             case "Payload":
-                                double payloadMass = (double)deviceMessage["body"]["mass"];
-                                double payloadCogx = (double)deviceMessage["body"]["cogx"];
-                                double payloadCogy = (double)deviceMessage["body"]["cogy"];
-                                double payloadCogz = (double)deviceMessage["body"]["cogz"];
-                                jsonPatchDocument.AppendReplace("/mass", payloadMass);
-                                jsonPatchDocument.AppendReplace("/cogx", payloadCogx);
-                                jsonPatchDocument.AppendReplace("/cogy", payloadCogy);
-                                jsonPatchDocument.AppendReplace("/cogz", payloadCogz);
+                                double payloadMass = (double)deviceMessage["body"]["Mass"];
+                                double payloadCogx = (double)deviceMessage["body"]["CogX"];
+                                double payloadCogy = (double)deviceMessage["body"]["CogY"];
+                                double payloadCogz = (double)deviceMessage["body"]["CogZ"];
+                                jsonPatchDocument.AppendReplace("/Mass", payloadMass);
+                                jsonPatchDocument.AppendReplace("/CogX", payloadCogx);
+                                jsonPatchDocument.AppendReplace("/CogY", payloadCogy);
+                                jsonPatchDocument.AppendReplace("/CogZ", payloadCogz);
                                 break;
                             case "Shoulder":
                                 double shoulderPosition = (double)deviceMessage["body"]["Position"];
